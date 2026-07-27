@@ -1,10 +1,7 @@
-using UnityEngine;
-
 /// <summary>
 /// クリック結果関連のデータを保持する
 /// </summary>
-[CreateAssetMenu(fileName = "ClickingData", menuName = "Scriptable Objects/ClickingData")]
-public class ClickingData : ScriptableObject
+public class ClickingData
 {
     /// <summary> 総クリック回数 </summary>
     private int _clickCount = 0;
