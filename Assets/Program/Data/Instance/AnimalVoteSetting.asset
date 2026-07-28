@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117d6a64e48524ba48c2fddc708363db, type: 3}
   m_Name: AnimalVoteSetting
   m_EditorClassIdentifier: 
+  _timeLimit: 10
   _initialRanking: 1000
   _popularity: 0.2
   _depth: 1

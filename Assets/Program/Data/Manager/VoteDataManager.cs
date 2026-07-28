@@ -47,9 +47,10 @@ public class VoteDataManager : ServiceBase
     {
         for(int i = 0; i < Data.AllVotes.Count; i++)
         {
-            if((targets & (VoteType)(1 << i)) != 0)
+            var target = Data.AllVotes[i];
+
+            if(target.isHeld && (targets & (VoteType)(1 << i)) != 0)
             {
-                var target = Data.AllVotes[i];
                 target.voteCount += votePower;
                 target.ranking -= votePower;
                 Data.AllVotes[i] = target;
@@ -57,6 +58,18 @@ public class VoteDataManager : ServiceBase
                 Debug.Log(Data.AllVotes[i].ranking);
             }
         }
+    }
+
+    /// <summary>
+    /// 投票の開催状況を操作する
+    /// </summary>
+    /// <param name="target">対象の投票</param>
+    /// <param name="held">開催中かどうか</param>
+    public void ManageVote(VoteType target, bool held)
+    {
+        var vote = Data.AllVotes[(int)Mathf.Log((int)target, 2)];
+        vote.isHeld = held;
+        Data.AllVotes[(int)Mathf.Log((int)target, 2)] = vote;
     }
 
     protected override void CreateService()

@@ -28,6 +28,20 @@ public class VoteDataHub : MonoBehaviour
         _manager.Vote(data.TargetVote, data.VotePower);
     }
 
+    /// <summary>
+    /// 投票を開催させる
+    /// </summary>
+    /// <param name="target">対象の投票</param>
+    public void OpenVote(VoteType target)
+    {
+        _manager.ManageVote(target, true);
+    }
+
+    public void VoteTest(int target)
+    {
+        OpenVote((VoteType)(1 << target));
+    }
+
     /// <summary> データの更新を通知するイベント </summary>
     [Serializable]
     private class VoteDataUpdataEvent : UnityEvent<VoteData>{}

@@ -6,6 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VoteSettingData", menuName = "Scriptable Objects/VoteSettingData")]
 public class VoteSettingData : ScriptableObject
 {
+    /// <summary> 開催期間 </summary>
+    [SerializeField]
+    private int _timeLimit;
+    /// <summary> 開催期間 </summary>
+    public int TimeLimit => _timeLimit;
+
     /// <summary> 初期順位 </summary>
     [SerializeField]
     private int _initialRanking;
