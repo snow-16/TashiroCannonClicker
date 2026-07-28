@@ -19,10 +19,7 @@ public class VoteDataManager : ServiceBase
     {
         for(int i = 0; i < Data.AllVotes.Count; i++)
         {
-            var vote = Data.AllVotes[i];
-            vote.setting = _voteSettings[i];
-            vote.ranking = vote.setting.InitialRanking;
-            Data.AllVotes[i] = vote;
+            ResetVote((VoteType)(1 << i));
         }
     }
 
@@ -70,6 +67,20 @@ public class VoteDataManager : ServiceBase
         var vote = Data.AllVotes[(int)Mathf.Log((int)target, 2)];
         vote.isHeld = held;
         Data.AllVotes[(int)Mathf.Log((int)target, 2)] = vote;
+
+        if(!held)
+        {
+            ResetVote(target);
+        }
+    }
+
+    public void ResetVote(VoteType target)
+    {
+        var index = (int)Mathf.Log((int)target, 2);
+        var vote = Data.AllVotes[index];
+        vote.setting = _voteSettings[index];
+        vote.ranking = vote.setting.InitialRanking;
+        Data.AllVotes[index] = vote;
     }
 
     protected override void CreateService()
