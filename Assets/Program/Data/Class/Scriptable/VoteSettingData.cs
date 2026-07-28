@@ -6,9 +6,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VoteSettingData", menuName = "Scriptable Objects/VoteSettingData")]
 public class VoteSettingData : ScriptableObject
 {
-    /// <summary> 投票内容 </summary>
+    /// <summary> 初期順位 </summary>
     [SerializeField]
-    private VoteType _type;
-    /// <summary> 投票内容 </summary>
-    public VoteType Type => _type;
+    private int _initialRanking;
+    /// <summary> 初期順位 </summary>
+    public int InitialRanking => _initialRanking;
+
+    /// <summary> 平均的な人気度 </summary>
+    [SerializeField]
+    private float _popularity;
+    /// <summary> 平均的な人気度 </summary>
+    public float Popularity => _popularity;
+
+    /// <summary> 人気の深さ </summary>
+    [SerializeField]
+    private float _depth;
+    /// <summary> 人気の深さ </summary>
+    public float Depth => _depth;
+
+    /// <summary> サーバーの耐久力 </summary>
+    [SerializeField]
+    private float _serverDurability;
+    /// <summary> サーバーの耐久力 </summary>
+    public float ServerDurability => _serverDurability;
 }

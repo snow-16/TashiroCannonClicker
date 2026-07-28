@@ -19,7 +19,7 @@ public class VoteData
         /// <summary> 投票数 </summary>
         public int voteCount;
         /// <summary> 順位 </summary>
-        public int ranking;
+        public float ranking;
         /// <summary> サーバー負荷n% </summary>
         public float serverLoad;
         /// <summary> 投票の設定情報 </summary>

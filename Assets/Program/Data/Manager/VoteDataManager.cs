@@ -21,7 +21,22 @@ public class VoteDataManager : ServiceBase
         {
             var vote = Data.AllVotes[i];
             vote.setting = _voteSettings[i];
+            vote.ranking = vote.setting.InitialRanking;
             Data.AllVotes[i] = vote;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        for(int i = 0; i < Data.AllVotes.Count; i++)
+        {
+            var target = Data.AllVotes[i];
+
+            if(target.ranking < target.setting.InitialRanking)
+            {
+                target.ranking += Mathf.Min(Mathf.Pow(Mathf.Sqrt(target.setting.InitialRanking - target.ranking) * target.setting.Popularity, target.setting.Depth), target.setting.InitialRanking);
+                Data.AllVotes[i] = target;
+            }
         }
     }
 
@@ -36,9 +51,10 @@ public class VoteDataManager : ServiceBase
             {
                 var target = Data.AllVotes[i];
                 target.voteCount += votePower;
+                target.ranking -= votePower;
                 Data.AllVotes[i] = target;
 
-                Debug.Log(Data.AllVotes[i].voteCount);
+                Debug.Log(Data.AllVotes[i].ranking);
             }
         }
     }

@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf273de586574618b156c40d0e1b45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _voteTarget: -1
+  _voteTarget: 1
   _initialVotePower: 1
   _onVoted:
     m_PersistentCalls:
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf273de586574618b156c40d0e1b45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _voteTarget: -1
+  _voteTarget: 1
   _initialVotePower: 2
   _onVoted:
     m_PersistentCalls:
@@ -977,6 +977,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _voteSettings:
   - {fileID: 11400000, guid: 4b658aa16607543c2962cf7d7f605eb4, type: 2}
+  - {fileID: 11400000, guid: 42ddea6576e774990b72a6a48a7fbdcc, type: 2}
+  - {fileID: 11400000, guid: 19624bf7b7dcc49cfbe0e081fb8fcf0c, type: 2}
 --- !u!1 &1361013454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,10 +1170,10 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1675136273}
   - {fileID: 1623454669}
-  - {fileID: 196965045}
   - {fileID: 1514875157}
   - {fileID: 1361013455}
   - {fileID: 1274024656}
+  - {fileID: 196965045}
   - {fileID: 1049295549}
   - {fileID: 1112706770}
   - {fileID: 968522978}
