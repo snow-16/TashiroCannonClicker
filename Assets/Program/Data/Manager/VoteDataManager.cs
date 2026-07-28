@@ -31,7 +31,7 @@ public class VoteDataManager : ServiceBase
 
             if(target.ranking < target.setting.InitialRanking)
             {
-                target.ranking += Mathf.Min(Mathf.Pow(target.setting.InitialRanking - target.ranking, target.setting.Depth) * target.setting.Popularity / 50, target.setting.InitialRanking);
+                target.ranking += Mathf.Min(Mathf.Pow(target.setting.InitialRanking - target.ranking, target.setting.Depth) * target.setting.Population / 50, target.setting.InitialRanking);
                 Data.AllVotes[i] = target;
             }
         }
@@ -52,7 +52,7 @@ public class VoteDataManager : ServiceBase
                 target.ranking -= votePower;
                 Data.AllVotes[i] = target;
 
-                Debug.Log(Data.AllVotes[i].ranking);
+                Debug.Log($"{(int)Data.AllVotes[i].ranking}位");
             }
         }
     }

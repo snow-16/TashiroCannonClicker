@@ -3,8 +3,8 @@
 /// </summary>
 public class CurrencyData
 {
-    /// <summary> スレ民数 </summary>
-    private int _people = 0;
-    /// <summary> スレ民数 </summary>
-    public int People { get => _people; set => _people = value; }
+    /// <summary> 知名度 </summary>
+    private int _popularity = 0;
+    /// <summary> 知名度 </summary>
+    public int Popularity { get => _popularity; set => _popularity = value; }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeLimit: 10
   _initialRanking: 1000
-  _popularity: 1
+  _population: 1
   _depth: 1
   _serverDurability: 10

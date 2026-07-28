@@ -18,11 +18,11 @@ public class VoteSettingData : ScriptableObject
     /// <summary> 初期順位 </summary>
     public int InitialRanking => _initialRanking;
 
-    /// <summary> 平均的な人気度 </summary>
+    /// <summary> 投票人口 </summary>
     [SerializeField]
-    private float _popularity;
-    /// <summary> 平均的な人気度 </summary>
-    public float Popularity => _popularity;
+    private float _population;
+    /// <summary> 投票人口 </summary>
+    public float Population => _population;
 
     /// <summary> 人気の深さ </summary>
     [SerializeField]
