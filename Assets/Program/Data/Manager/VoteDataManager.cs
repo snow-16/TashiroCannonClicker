@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// VoteDataの管理を行うマネージャーコンポーネント
 /// </summary>
-public class VoteDataManager : MonoBehaviour
+public class VoteDataManager : ServiceBase
 {
     /// <summary> 各投票サイトの設定 </summary>
     [SerializeField]
@@ -42,5 +42,10 @@ public class VoteDataManager : MonoBehaviour
                 Debug.Log(_data.AllVotes[i].voteCount);
             }
         }
+    }
+
+    protected override void CreateService()
+    {
+        ServiceLocater.AddService(this);
     }
 }

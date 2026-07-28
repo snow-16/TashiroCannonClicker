@@ -7,7 +7,7 @@ using UnityEngine.Events;
 /// <summary>
 /// ClickingDataの管理を行うマネージャーコンポーネント
 /// </summary>
-public class ClickingDataManager : MonoBehaviour
+public class ClickingDataManager : ServiceBase
 {
     /// <summary> 各クリック履歴を保存しておく時間 </summary>
     [SerializeField]
@@ -34,12 +34,17 @@ public class ClickingDataManager : MonoBehaviour
     {
         var cacheVPS = _data.VotePerSecond;
         _clickLogs = _clickLogs.Select(log => (log.progressTime + Time.deltaTime, log.clickAmount)).Where(log => log.Item1 < _clickLogSurviveTime).ToList();
-        _data.VotePerSecond = _clickLogs.Sum(log => log.clickAmount);
+        _data.VotePerSecond = _clickLogs.Sum(log => log.clickAmount / _clickLogSurviveTime);
 
         if(cacheVPS != _data.VotePerSecond)
         {
             _updateListeners?.Invoke(_data);
         }
+    }
+
+    protected override void CreateService()
+    {
+        ServiceLocater.AddService(this);
     }
 
     [Serializable]

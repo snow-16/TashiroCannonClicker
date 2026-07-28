@@ -26,9 +26,13 @@ public class VoteDataManagerEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
+
         for(int i = 0; i < _voteSettings.arraySize; i++)
         {
             EditorGUILayout.PropertyField(_voteSettings.GetArrayElementAtIndex(i), new GUIContent(((VoteType)(1 << i)).ToString()));
         }
+
+        serializedObject.ApplyModifiedProperties();
     }
 }
