@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ゲーム初期化用コンポーネント
 /// </summary>
+[DefaultExecutionOrder(100)]
 public class GameInitializer : MonoBehaviour
 {
     void Awake()
