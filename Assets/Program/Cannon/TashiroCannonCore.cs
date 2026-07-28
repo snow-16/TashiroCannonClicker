@@ -1,6 +1,7 @@
 using System;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 田代砲の土台コンポーネント
@@ -10,6 +11,9 @@ public class TashiroCannonCore : MonoBehaviour
     /// <summary> 発射タイマーをリセットする基準となる、キャッシュとの倍率差 </summary>
     [SerializeField]
     private float _timerLisetBorder;
+    /// <summary> 発射時の処理 </summary>
+    [SerializeField]
+    private UnityEvent _fireEvent;
 
     /// <summary> 投票回数/秒 </summary>
     private float _votePerSecond;
@@ -28,7 +32,7 @@ public class TashiroCannonCore : MonoBehaviour
         _fireTimer = Observable.Timer(TimeSpan.FromSeconds(1 / _votePerSecond)).Repeat().Subscribe(_ => 
             {
                 _cacheVPS = _votePerSecond;
-                Debug.Log("発射！");
+                _fireEvent?.Invoke();
             }
         );
     }

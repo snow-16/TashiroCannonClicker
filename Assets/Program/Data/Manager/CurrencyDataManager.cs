@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class CurrencyDataManager : MonoBehaviour
 {
+    /// <summary> 開始時の参加人数 </summary>
     [SerializeField]
     private int _initialPeoples;
 

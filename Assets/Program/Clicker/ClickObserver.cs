@@ -18,7 +18,6 @@ public class ClickObserver : MonoBehaviour
     void Start()
     {
         _click.Enable();
-
         Observable.EveryUpdate().Where(_ => _click.WasPressedThisFrame()).Subscribe(_ => _clickEvent?.Invoke());
     }
 }
