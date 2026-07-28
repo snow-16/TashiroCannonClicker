@@ -22,5 +22,7 @@ public class VoteData
         public int ranking;
         /// <summary> サーバー負荷n% </summary>
         public float serverLoad;
+        /// <summary> 投票の設定情報 </summary>
+        public VoteSettingData setting;
     }
 }

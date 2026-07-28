@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -5,9 +6,25 @@ using UnityEngine;
 /// </summary>
 public class VoteDataManager : MonoBehaviour
 {
+    /// <summary> 各投票サイトの設定 </summary>
+    [SerializeField]
+    private List<VoteSettingData> _voteSettings;
+    /// <summary> 各投票サイトの設定 </summary>
+    public List<VoteSettingData> VoteSettings { get => _voteSettings; set => _voteSettings = value; }
+
     /// <summary> VoteDataのインスタンス </summary>
     private readonly VoteData _data = new();
-    
+
+    void Start()
+    {
+        for(int i = 0; i < _data.AllVotes.Count; i++)
+        {
+            var vote = _data.AllVotes[i];
+            vote.setting = _voteSettings[i];
+            _data.AllVotes[i] = vote;
+        }
+    }
+
     /// <summary>
     /// 投票時の処理
     /// </summary>
