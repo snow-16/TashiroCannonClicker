@@ -31,7 +31,7 @@ public class VoteDataManager : ServiceBase
 
             if(target.ranking < target.setting.InitialRanking)
             {
-                target.ranking += Mathf.Min(Mathf.Pow(Mathf.Sqrt(target.setting.InitialRanking - target.ranking) * target.setting.Popularity, target.setting.Depth), target.setting.InitialRanking);
+                target.ranking += Mathf.Min(Mathf.Pow(target.setting.InitialRanking - target.ranking, target.setting.Depth) * target.setting.Popularity / 50, target.setting.InitialRanking);
                 Data.AllVotes[i] = target;
             }
         }
