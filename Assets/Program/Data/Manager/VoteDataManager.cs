@@ -13,33 +13,32 @@ public class VoteDataManager : ServiceBase
     public List<VoteSettingData> VoteSettings { get => _voteSettings; set => _voteSettings = value; }
 
     /// <summary> VoteDataのインスタンス </summary>
-    private readonly VoteData _data = new();
+    public readonly VoteData Data = new();
 
     void Start()
     {
-        for(int i = 0; i < _data.AllVotes.Count; i++)
+        for(int i = 0; i < Data.AllVotes.Count; i++)
         {
-            var vote = _data.AllVotes[i];
+            var vote = Data.AllVotes[i];
             vote.setting = _voteSettings[i];
-            _data.AllVotes[i] = vote;
+            Data.AllVotes[i] = vote;
         }
     }
 
     /// <summary>
     /// 投票時の処理
     /// </summary>
-    /// <param name="data"></param>
-    public void Vote(VoterStatusData data)
+    public void Vote(VoteType targets, int votePower)
     {
-        for(int i = 0; i < _data.AllVotes.Count; i++)
+        for(int i = 0; i < Data.AllVotes.Count; i++)
         {
-            if((data.TargetVote & (VoteType)(1 << i)) != 0)
+            if((targets & (VoteType)(1 << i)) != 0)
             {
-                var target = _data.AllVotes[i];
-                target.voteCount += data.VotePower;
-                _data.AllVotes[i] = target;
+                var target = Data.AllVotes[i];
+                target.voteCount += votePower;
+                Data.AllVotes[i] = target;
 
-                Debug.Log(_data.AllVotes[i].voteCount);
+                Debug.Log(Data.AllVotes[i].voteCount);
             }
         }
     }

@@ -31,7 +31,7 @@ public class ServiceLocater
     /// </summary>
     /// <typeparam name="T">インスタンスの型</typeparam>
     /// <param name="result">返すインスタンス</param>
-    /// <returns>インスタンス</returns>
+    /// <returns>インスタンスを取得できたか</returns>
     public static bool LocateService<T>(out T result) where T : ServiceBase
     {
         result = (T)Services[typeof(T).ToString()];

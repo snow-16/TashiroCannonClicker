@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// ClickingDataの管理を行うマネージャーコンポーネント
@@ -12,41 +10,41 @@ public class ClickingDataManager : ServiceBase
     /// <summary> 各クリック履歴を保存しておく時間 </summary>
     [SerializeField]
     private float _clickLogSurviveTime;
-    /// <summary> データの更新を受け取るメソッドリスト </summary>
-    [SerializeField]
-    private ClickingDataUpdataEvent _updateListeners;
 
     /// <summary> ClickingDataのインスタンス </summary>
-    private readonly ClickingData _data = new();
+    public readonly ClickingData Data = new();
     /// <summary> 直近1秒間のクリック内容の履歴 </summary>
     private List<(float progressTime, int clickAmount)> _clickLogs = new();
 
     /// <summary>
-    /// 画面がクリックされた時
+    /// クリック処理
     /// </summary>
-    public void OnClick()
+    public void ClickEvent()
     {
-        _data.ClickCount++;
+        Data.ClickCount++;
         _clickLogs.Add((0, 1));
     }
 
-    void Update()
+    /// <summary>
+    /// クリック履歴とVPSの更新
+    /// </summary>
+    /// <returns>更新されたか</returns>
+    public bool UpdateLog()
     {
-        var cacheVPS = _data.VotePerSecond;
-        _clickLogs = _clickLogs.Select(log => (log.progressTime + Time.deltaTime, log.clickAmount)).Where(log => log.Item1 < _clickLogSurviveTime).ToList();
-        _data.VotePerSecond = _clickLogs.Sum(log => log.clickAmount / _clickLogSurviveTime);
-
-        if(cacheVPS != _data.VotePerSecond)
+        if(_clickLogs.Count > 0)
         {
-            _updateListeners?.Invoke(_data);
+            var cacheVPS = Data.VotePerSecond;
+            _clickLogs = _clickLogs.Select(log => (log.progressTime + Time.deltaTime, log.clickAmount)).Where(log => log.Item1 < _clickLogSurviveTime).ToList();
+            Data.VotePerSecond = _clickLogs.Sum(log => log.clickAmount / _clickLogSurviveTime);
+
+            return cacheVPS != Data.VotePerSecond;
         }
+
+        return false;
     }
 
     protected override void CreateService()
     {
         ServiceLocater.AddService(this);
     }
-
-    [Serializable]
-    private class ClickingDataUpdataEvent : UnityEvent<ClickingData>{}
 }

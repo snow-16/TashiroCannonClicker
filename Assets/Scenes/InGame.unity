@@ -221,8 +221,8 @@ MonoBehaviour:
   _onVoted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1344307195}
-        m_TargetAssemblyTypeName: ClickingDataManager, Assembly-CSharp
+      - m_Target: {fileID: 1361013456}
+        m_TargetAssemblyTypeName: ClickingDataHub, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -233,8 +233,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1344307197}
-        m_TargetAssemblyTypeName: VoteDataManager, Assembly-CSharp
+      - m_Target: {fileID: 1361013457}
+        m_TargetAssemblyTypeName: VoteDataHub, Assembly-CSharp
         m_MethodName: Vote
         m_Mode: 0
         m_Arguments:
@@ -830,8 +830,8 @@ MonoBehaviour:
   _onVoted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1344307197}
-        m_TargetAssemblyTypeName: VoteDataManager, Assembly-CSharp
+      - m_Target: {fileID: 1361013457}
+        m_TargetAssemblyTypeName: VoteDataHub, Assembly-CSharp
         m_MethodName: Vote
         m_Mode: 0
         m_Arguments:
@@ -951,6 +951,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clickLogSurviveTime: 5
+--- !u!114 &1344307196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344307193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1752b747eae2412b9d8e4aa4c202509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1344307197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344307193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55614616dfcd040beab1e59db05a971e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voteSettings:
+  - {fileID: 11400000, guid: 4b658aa16607543c2962cf7d7f605eb4, type: 2}
+--- !u!1 &1361013454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1361013455}
+  - component: {fileID: 1361013456}
+  - component: {fileID: 1361013457}
+  m_Layer: 0
+  m_Name: DataHub
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1361013455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361013454}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 378.01495, y: 90.289536, z: -1.4778163}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1361013456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361013454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1c2a6358c0407b90367bd05ea45b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _updateListeners:
     m_PersistentCalls:
       m_Calls:
@@ -966,45 +1037,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 196965047}
-        m_TargetAssemblyTypeName: VoteListener, Assembly-CSharp
-        m_MethodName: UpdateTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1344307196
+--- !u!114 &1361013457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344307193}
+  m_GameObject: {fileID: 1361013454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1752b747eae2412b9d8e4aa4c202509, type: 3}
+  m_Script: {fileID: 11500000, guid: 48890ef7a72024ef4bd02b02fecb5dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialPeoples: 10
---- !u!114 &1344307197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344307193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55614616dfcd040beab1e59db05a971e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _voteSettings:
-  - {fileID: 11400000, guid: 4b658aa16607543c2962cf7d7f605eb4, type: 2}
+  _updateListeners:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1514875156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,9 +1167,10 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1675136273}
   - {fileID: 1623454669}
+  - {fileID: 1344307194}
   - {fileID: 196965045}
   - {fileID: 1514875157}
-  - {fileID: 1344307194}
+  - {fileID: 1361013455}
   - {fileID: 1274024656}
   - {fileID: 1049295549}
   - {fileID: 1112706770}
