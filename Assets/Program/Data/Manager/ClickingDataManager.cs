@@ -9,6 +9,9 @@ using UnityEngine.Events;
 /// </summary>
 public class ClickingDataManager : MonoBehaviour
 {
+    /// <summary> 各クリック履歴を保存しておく時間 </summary>
+    [SerializeField]
+    private float _clickLogSurviveTime;
     /// <summary> データの更新を受け取るメソッドリスト </summary>
     [SerializeField]
     private ClickingDataUpdataEvent _updateListeners;
@@ -30,7 +33,7 @@ public class ClickingDataManager : MonoBehaviour
     void Update()
     {
         var cacheVPS = _data.VotePerSecond;
-        _clickLogs = _clickLogs.Select(log => (log.progressTime + Time.deltaTime, log.clickAmount)).Where(log => log.Item1 < 1).ToList();
+        _clickLogs = _clickLogs.Select(log => (log.progressTime + Time.deltaTime, log.clickAmount)).Where(log => log.Item1 < _clickLogSurviveTime).ToList();
         _data.VotePerSecond = _clickLogs.Sum(log => log.clickAmount);
 
         if(cacheVPS != _data.VotePerSecond)
