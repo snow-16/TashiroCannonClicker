@@ -4,9 +4,9 @@
 public class VoterStatusData
 {
     /// <summary> 投票先 </summary>
-    private int _targetVote = 0;
+    private VoteType _targetVote = VoteType.Animal;
     /// <summary> 投票先 </summary>
-    public int TargetVote { get => _targetVote; set => _targetVote = value; }
+    public VoteType TargetVote { get => _targetVote; set => _targetVote = value; }
 
     /// <summary> 一回毎の投票数 </summary>
     private int _votePower = 1;

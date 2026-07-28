@@ -7,6 +7,9 @@ using UnityEngine.Events;
 /// </summary>
 public class VoteListener : MonoBehaviour
 {
+    /// <summary> 投票先 </summary>
+    [SerializeField]
+    private VoteType _voteTarget;
     /// <summary> 投票力の初期値 </summary>
     [SerializeField]
     private int _initialVotePower;
@@ -27,7 +30,17 @@ public class VoteListener : MonoBehaviour
     /// </summary>
     public void Vote()
     {
+        _voterStatusData.TargetVote = _voteTarget;
         _onVoted?.Invoke(_voterStatusData);
+    }
+
+    /// <summary>
+    /// 投票先の更新
+    /// </summary>
+    /// <param name="data">ClickingDataのインスタンス</param>
+    public void UpdateTarget(ClickingData data)
+    {
+        _voteTarget = data.VoteTarget;
     }
 
     /// <summary>

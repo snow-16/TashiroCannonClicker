@@ -14,10 +14,16 @@ public class VoteDataManager : MonoBehaviour
     /// <param name="data"></param>
     public void Vote(VoterStatusData data)
     {
-        var target = _data.AllVotes[data.TargetVote];
-        target.voteCount += data.VotePower;
-        _data.AllVotes[data.TargetVote] = target;
+        for(int i = 0; i < _data.AllVotes.Count; i++)
+        {
+            if((data.TargetVote & (VoteType)(1 << i)) != 0)
+            {
+                var target = _data.AllVotes[i];
+                target.voteCount += data.VotePower;
+                _data.AllVotes[i] = target;
 
-        Debug.Log(_data.AllVotes[data.TargetVote].voteCount);
+                Debug.Log(_data.AllVotes[i].voteCount);
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-
 
 /// <summary>
 /// 投票関連のデータを保管する
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class VoteData
 {
     /// <summary> 各投票サイトの状況 </summary>
-    private List<VoteContainer> _allVotes = new(new VoteContainer[5]);
+    private List<VoteContainer> _allVotes = new(new VoteContainer[Enum.GetValues(typeof(VoteType)).Length]);
     /// <summary> 各投票サイトの状況 </summary>
     public List<VoteContainer> AllVotes { get => _allVotes; set => _allVotes = value; }
 

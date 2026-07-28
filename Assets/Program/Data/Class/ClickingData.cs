@@ -3,6 +3,11 @@
 /// </summary>
 public class ClickingData
 {
+    /// <summary> 投票先 </summary>
+    private VoteType _voteTarget = VoteType.Animal;
+    /// <summary> 投票先 </summary>
+    public VoteType VoteTarget { get => _voteTarget; set => _voteTarget = value; }
+
     /// <summary> 総クリック回数 </summary>
     private int _clickCount = 0;
     /// <summary> 総クリック回数 </summary>
