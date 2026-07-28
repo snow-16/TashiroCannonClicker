@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AnimalVoteSetting
   m_EditorClassIdentifier: 
   _timeLimit: 10
+  _openInterval: 5
   _initialRanking: 1000
   _population: 1
   _depth: 1

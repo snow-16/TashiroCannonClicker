@@ -12,6 +12,12 @@ public class VoteSettingData : ScriptableObject
     /// <summary> 開催期間 </summary>
     public int TimeLimit => _timeLimit;
 
+    /// <summary> 開催準備期間 </summary>
+    [SerializeField]
+    private int _openInterval;
+    /// <summary> 開催準備期間 </summary>
+    public int OpenInterval => _openInterval;
+
     /// <summary> 初期順位 </summary>
     [SerializeField]
     private int _initialRanking;

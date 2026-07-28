@@ -46,7 +46,7 @@ public class VoteDataManager : ServiceBase
         {
             var target = Data.AllVotes[i];
 
-            if(target.isHeld && (targets & (VoteType)(1 << i)) != 0)
+            if(target.state == VoteState.Opened && (targets & (VoteType)(1 << i)) != 0)
             {
                 target.voteCount += votePower;
                 target.ranking -= votePower;
@@ -61,19 +61,23 @@ public class VoteDataManager : ServiceBase
     /// 投票の開催状況を操作する
     /// </summary>
     /// <param name="target">対象の投票</param>
-    /// <param name="held">開催中かどうか</param>
-    public void ManageVote(VoteType target, bool held)
+    /// <param name="state">開催状況</param>
+    public void ManageVote(VoteType target, VoteState state)
     {
         var vote = Data.AllVotes[(int)Mathf.Log((int)target, 2)];
-        vote.isHeld = held;
+        vote.state = state;
         Data.AllVotes[(int)Mathf.Log((int)target, 2)] = vote;
 
-        if(!held)
+        if(state == VoteState.Waiting)
         {
             ResetVote(target);
         }
     }
 
+    /// <summary>
+    /// 投票の状態を初期化する
+    /// </summary>
+    /// <param name="target">対象の投票</param>
     public void ResetVote(VoteType target)
     {
         var index = (int)Mathf.Log((int)target, 2);

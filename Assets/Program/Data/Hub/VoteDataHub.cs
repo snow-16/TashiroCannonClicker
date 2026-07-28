@@ -35,7 +35,7 @@ public class VoteDataHub : MonoBehaviour
     public void OpenVote(VoteType target)
     {
         Debug.Log($"{target}を開催しました。");
-        _manager.ManageVote(target, true);
+        _manager.ManageVote(target, VoteState.Opened);
     }
 
     /// <summary>
@@ -45,7 +45,17 @@ public class VoteDataHub : MonoBehaviour
     public void CloseVote(VoteType target)
     {
         Debug.Log($"{target}を終了しました。");
-        _manager.ManageVote(target, false);
+        _manager.ManageVote(target, VoteState.Waiting);
+    }
+
+    /// <summary>
+    /// 投票準備を終える
+    /// </summary>
+    /// <param name="target">対象の投票</param>
+    public void ProgressedVote(VoteType target)
+    {
+        Debug.Log($"{target}は開催可能です。");
+        _manager.ManageVote(target, VoteState.Closed);
     }
 
     public void VoteTest(int target)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,10 @@ public class VoteScheduler : MonoBehaviour
 {
     /// <summary> 投票終了時の処理 </summary>
     [SerializeField]
-    private CloseVoteEvent _closeVoteEvent;
+    private VoteScheduleEvent _closeVoteEvent;
+    /// <summary> 投票準備完了時の処理 </summary>
+    [SerializeField]
+    private VoteScheduleEvent _progressedVoteEvent;
 
     /// <summary>
     /// 各投票の期間管理を開始する
@@ -23,19 +27,36 @@ public class VoteScheduler : MonoBehaviour
         {
             var votes = manager.Data.AllVotes;
             var index = i;
-            this.ObserveEveryValueChanged(_ => votes[index].isHeld).Where(isHeld => isHeld).Subscribe(_ =>
+            this.ObserveEveryValueChanged(_ => votes[index].state).Where(state => state == VoteState.Opened).Subscribe(_ =>
                 {
-                    Observable.Timer(TimeSpan.FromSeconds(votes[index].setting.TimeLimit)).First().Subscribe(_ =>
-                        {
-                            _closeVoteEvent?.Invoke((VoteType)(1 << index));
-                        }
-                    ).AddTo(this);
+                    SetSchedule((VoteType)(1 << index), votes, index);
                 }
             ).AddTo(this);
         }
     }
 
+    /// <summary>
+    /// 投票のタイマーを開始する
+    /// </summary>
+    /// <param name="target">対象の投票</param>
+    /// <param name="votes">投票サイトデータのリスト</param>
+    /// <param name="votesIndex">リストのインデックス</param>
+    private void SetSchedule(VoteType target, List<VoteData.VoteContainer> votes, int votesIndex)
+    {
+        Observable.Timer(TimeSpan.FromSeconds(votes[votesIndex].setting.TimeLimit)).First().Subscribe(_ =>
+            {
+                _closeVoteEvent?.Invoke(target);
+
+                Observable.Timer(TimeSpan.FromSeconds(votes[votesIndex].setting.OpenInterval)).First().Subscribe(_ =>
+                    {
+                        _progressedVoteEvent?.Invoke(target);
+                    }
+                ).AddTo(this);
+            }
+        ).AddTo(this);
+    }
+
     /// <summary> 投票毎に終了処理を走らせるイベント </summary>
     [Serializable]
-    private class CloseVoteEvent : UnityEvent<VoteType>{}
+    private class VoteScheduleEvent : UnityEvent<VoteType>{}
 }

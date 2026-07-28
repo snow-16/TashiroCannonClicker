@@ -16,8 +16,8 @@ public class VoteData
     /// </summary>
     public struct VoteContainer
     {
-        /// <summary> 現在開催中かどうか </summary>
-        public bool isHeld;
+        /// <summary> 投票サイトの状態 </summary>
+        public VoteState state;
         /// <summary> 投票数 </summary>
         public int voteCount;
         /// <summary> 順位 </summary>
