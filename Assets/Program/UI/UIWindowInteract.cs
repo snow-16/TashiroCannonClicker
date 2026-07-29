@@ -1,19 +1,33 @@
 using UnityEngine;
 
+
 /// <summary>
 /// ウィンドウへの接触判定用コンポーネント
 /// </summary>
 public class UIWindowInteract : InteractableUI
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// タッチされた時
+    /// </summary>
+    public void Interact()
     {
-        
+        transform.GetChild(0).gameObject.SetActive(false);
+        CanInteract = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// 投票が閉じた時
+    /// </summary>
+    public void Close()
     {
-        
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 投票準備が完了したとき
+    /// </summary>
+    public void Progressed()
+    {
+        CanInteract = true;
     }
 }

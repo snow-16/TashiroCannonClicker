@@ -550,10 +550,22 @@ MonoBehaviour:
   _interactEvent:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880716525}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 621274909}
+        m_TargetAssemblyTypeName: UIWindowInteract, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1361013457}
+        m_TargetAssemblyTypeName: VoteDataHub, Assembly-CSharp
+        m_MethodName: OpenVote
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -622,6 +634,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 621274909}
+        m_TargetAssemblyTypeName: UIWindowInteract, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _progressedVoteEvent:
     m_PersistentCalls:
       m_Calls:
@@ -629,6 +653,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: VoteDataHub, Assembly-CSharp
         m_MethodName: ProgressedVote
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 621274909}
+        m_TargetAssemblyTypeName: UIWindowInteract, Assembly-CSharp
+        m_MethodName: Progressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -670,7 +706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &739192340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -747,10 +783,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1361013457}
-        m_TargetAssemblyTypeName: VoteDataHub, Assembly-CSharp
-        m_MethodName: VoteTest
-        m_Mode: 3
+      - m_Target: {fileID: 739192339}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1304,6 +1340,7 @@ GameObject:
   - component: {fileID: 1344307195}
   - component: {fileID: 1344307196}
   - component: {fileID: 1344307197}
+  - component: {fileID: 1344307198}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -1367,6 +1404,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4b658aa16607543c2962cf7d7f605eb4, type: 2}
   - {fileID: 11400000, guid: 42ddea6576e774990b72a6a48a7fbdcc, type: 2}
   - {fileID: 11400000, guid: 19624bf7b7dcc49cfbe0e081fb8fcf0c, type: 2}
+--- !u!114 &1344307198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344307193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4916127981f48e2a75486d44105b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1361013454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1428,7 @@ GameObject:
   - component: {fileID: 1361013456}
   - component: {fileID: 1361013457}
   - component: {fileID: 1361013458}
+  - component: {fileID: 1361013459}
   m_Layer: 0
   m_Name: DataHub
   m_TagString: Untagged
@@ -1453,6 +1503,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff0e9b90104064e6386936946ab71f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _updateListeners:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1361013459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361013454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c21e5e68d36c4b0a83f379bdaeb31bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _updateListeners:

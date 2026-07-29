@@ -31,6 +31,15 @@ public class VoteDataHub : MonoBehaviour
     /// <summary>
     /// 投票を開催させる
     /// </summary>
+    public void OpenVote()
+    {
+        ServiceLocater.LocateService(out FieldDataManager manager);
+        OpenVote(manager.Data.ViewVote);
+    }
+
+    /// <summary>
+    /// 投票を開催させる
+    /// </summary>
     /// <param name="target">対象の投票</param>
     public void OpenVote(VoteType target)
     {
@@ -56,11 +65,6 @@ public class VoteDataHub : MonoBehaviour
     {
         Debug.Log($"{target}は開催可能です。");
         _manager.ManageVote(target, VoteState.Closed);
-    }
-
-    public void VoteTest(int target)
-    {
-        OpenVote((VoteType)(1 << target));
     }
 
     /// <summary> データの更新を通知するイベント </summary>
