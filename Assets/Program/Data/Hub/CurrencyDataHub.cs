@@ -19,11 +19,16 @@ public class CurrencyDataHub : MonoBehaviour
         while(!ServiceLocater.LocateService(out _manager));
     }
 
+    /// <summary>
+    /// 最終順位から知名度を獲得する
+    /// </summary>
+    /// <param name="target">対象の投票</param>
     public void CollectPopularity(VoteType target)
     {
         ServiceLocater.LocateService(out VoteDataManager _voteDataManager);
         var vote = _voteDataManager.Data.AllVotes[(int)Mathf.Log((int)target, 2)];
         _manager.ModifyPopularity(vote.setting.InitialRanking - (int)vote.ranking);
+        _updateListeners?.Invoke(_manager.Data);
     }
 
     /// <summary> データの更新を通知するイベント </summary>
