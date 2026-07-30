@@ -1,3 +1,4 @@
+using System.Linq;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,9 @@ public class ClickObserver : MonoBehaviour
     /// <summary> クリック時の処理 </summary>
     [SerializeField]
     private UnityEvent _clickEvent;
+    /// <summary> クリックできる範囲を示すコライダー </summary>
+    [SerializeField]
+    private Collider2D _canClickArea;
 
     /// <summary> 現在クリックを受け付けているか </summary>
     private bool _canClicking = true;
@@ -21,7 +25,9 @@ public class ClickObserver : MonoBehaviour
     void Start()
     {
         _click.Enable();
-        Observable.EveryUpdate().Where(_ => _click.WasPressedThisFrame() && _canClicking).Subscribe(_ => _clickEvent?.Invoke()).AddTo(this);
+        Observable.EveryUpdate()
+        .Where(_ => _click.WasPressedThisFrame() && _canClicking && Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Pointer.current.position.value), 0).Contains(_canClickArea))
+        .Subscribe(_ => _clickEvent?.Invoke()).AddTo(this);
     }
 
     /// <summary>
