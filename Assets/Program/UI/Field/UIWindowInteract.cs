@@ -1,6 +1,3 @@
-using UnityEngine;
-
-
 /// <summary>
 /// ウィンドウへの接触判定用コンポーネント
 /// </summary>
@@ -11,16 +8,7 @@ public class UIWindowInteract : InteractableUI
     /// </summary>
     public void Interact()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
         CanInteract = false;
-    }
-
-    /// <summary>
-    /// 投票が閉じた時
-    /// </summary>
-    public void Close()
-    {
-        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     /// <summary>
