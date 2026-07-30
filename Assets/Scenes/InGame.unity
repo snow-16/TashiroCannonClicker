@@ -479,6 +479,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dcf30ffd6bab4486ad9794ed03e187e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _menuUpdateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1361013460}
+        m_TargetAssemblyTypeName: MenuDataHub, Assembly-CSharp
+        m_MethodName: ChangeMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _menuButton: {fileID: 563034676}
 --- !u!1 &519420028
 GameObject:
@@ -1590,6 +1605,7 @@ GameObject:
   - component: {fileID: 1344307196}
   - component: {fileID: 1344307197}
   - component: {fileID: 1344307198}
+  - component: {fileID: 1344307199}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -1665,6 +1681,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4916127981f48e2a75486d44105b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1344307199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344307193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544fb254881f042f3bca8613d31f131d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1361013454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,6 +1706,7 @@ GameObject:
   - component: {fileID: 1361013457}
   - component: {fileID: 1361013458}
   - component: {fileID: 1361013459}
+  - component: {fileID: 1361013460}
   m_Layer: 0
   m_Name: DataHub
   m_TagString: Untagged
@@ -1796,6 +1825,33 @@ MonoBehaviour:
   _updateListeners:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1361013460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361013454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3cbdf09ae1743c3b2113d6c17b41c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _updateListeners:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 196965046}
+        m_TargetAssemblyTypeName: ClickObserver, Assembly-CSharp
+        m_MethodName: UpdateMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1420248400
 GameObject:
   m_ObjectHideFlags: 0

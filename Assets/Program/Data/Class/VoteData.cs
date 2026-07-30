@@ -7,9 +7,7 @@ using System.Collections.Generic;
 public class VoteData
 {
     /// <summary> 各投票サイトの状況 </summary>
-    private List<VoteContainer> _allVotes = new(new VoteContainer[Enum.GetValues(typeof(VoteType)).Length]);
-    /// <summary> 各投票サイトの状況 </summary>
-    public List<VoteContainer> AllVotes { get => _allVotes; set => _allVotes = value; }
+    public List<VoteContainer> AllVotes { get; set; } = new(new VoteContainer[Enum.GetValues(typeof(VoteType)).Length]);
 
     /// <summary>
     /// 投票サイト毎のデータ

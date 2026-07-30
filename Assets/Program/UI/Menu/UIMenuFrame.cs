@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// メニューの大枠を管理するUIコンポーネント
 /// </summary>
 public class UIMenuFrame : MonoBehaviour
 {
+    [SerializeField]
+    /// <summary> メニュー画面の更新を通知する </summary>
+    private MenuDataUpdataEvent _menuUpdateEvent;
     /// <summary> メニュー開閉ボタン </summary>
     [SerializeField]
     private InteractableButtonUI _menuButton;
-
-    /// <summary> 現在開いているメニュー </summary>
-    private MenuType _nowMenu = MenuType.Close;
 
     /// <summary> Animatorコンポーネントのインスタンス </summary>
     private Animator _animator;
@@ -25,10 +27,11 @@ public class UIMenuFrame : MonoBehaviour
     /// </summary>
     public void MenuTransition()
     {
-        var isClosed = _nowMenu == MenuType.Close;
+        ServiceLocater.LocateService(out MenuDataManager menuDataManager);
+        var isClosed = menuDataManager.Data.OpenMenu == MenuType.Close;
         _animator.Play(isClosed ? "MenuOpen" : "MenuClose");
-        _nowMenu = isClosed ? MenuType.Upgrade : MenuType.Close;
         _menuButton.SwitchLockInteract();
+        _menuUpdateEvent?.Invoke(isClosed ? MenuType.Upgrade : MenuType.Close);
     }
 
     /// <summary>
@@ -38,4 +41,8 @@ public class UIMenuFrame : MonoBehaviour
     {
         _menuButton.SwitchLockInteract();
     }
+
+    /// <summary> メニュー画面の更新を通知するイベント </summary>
+    [Serializable]
+    private class MenuDataUpdataEvent : UnityEvent<MenuType>{}
 }
