@@ -23,6 +23,11 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     /// <summary> 現在触れるか </summary>
     public bool CanInteract { get; set; } = true;
 
+    /// <summary> 今マウスオーバーされているか </summary>
+    protected bool _isFocused = false;
+    /// <summary> 今押し込まれているか </summary>
+    protected bool _isPressed = false;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if(CanInteract && (_acceptInteract & UIIntercatType.Click) > 0)
@@ -33,33 +38,65 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        _isFocused = true;
+
         if(CanInteract && (_acceptInteract & UIIntercatType.Focus) > 0)
         {
             _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
         }
+
+        OnFocus();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        _isFocused = false;
+
         if(CanInteract && (_acceptInteract & UIIntercatType.Focus) > 0)
         {
             _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
         }
+
+        OnFocus();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        _isPressed = true;
+
         if(CanInteract && (_acceptInteract & UIIntercatType.Press) > 0)
         {
             _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
         }
+
+        OnPress();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        _isPressed = false;
+
         if(CanInteract && (_acceptInteract & UIIntercatType.Press) > 0)
         {
             _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
         }
+
+        OnPress();
+    }
+
+    /// <summary>
+    /// ボタンがマウスオーバーされたとき・外れたとき
+    /// </summary>
+    public virtual void OnFocus()
+    {
+        
+    }
+
+    /// <summary>
+    /// ボタンが押されたとき・離されたとき
+    /// </summary>
+    public virtual void OnPress()
+    {
+        
     }
 }

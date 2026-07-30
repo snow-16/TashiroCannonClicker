@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CustomEditor(typeof(InteractableUI))]
-public class InteractableUIEditor : Editor
+public abstract class InteractableUIEditor : Editor
 {
-    private InteractableUI _interactableUI;
-    private SerializedProperty _interactEvent;
+    protected InteractableUI _interactableUI;
+    protected SerializedProperty _interactEvent;
 
     void OnEnable()
     {
