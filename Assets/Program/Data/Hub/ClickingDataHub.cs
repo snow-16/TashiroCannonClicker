@@ -16,7 +16,7 @@ public class ClickingDataHub : MonoBehaviour
 
     void Start()
     {
-        while(!ServiceLocater.LocateService(out _manager));
+        ServiceLocater.LocateService(out _manager);
     }
 
     void Update()

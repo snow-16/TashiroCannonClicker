@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// CurrencyDataの管理を行うマネージャーコンポーネント
 /// </summary>
+[DefaultExecutionOrder(-99)]
 public class CurrencyDataManager : ServiceBase
 {
     /// <summary> CurrencyDataのインスタンス </summary>

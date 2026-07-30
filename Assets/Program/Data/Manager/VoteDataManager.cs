@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// VoteDataの管理を行うマネージャーコンポーネント
 /// </summary>
+[DefaultExecutionOrder(-99)]
 public class VoteDataManager : ServiceBase
 {
     /// <summary> 各投票サイトの設定 </summary>

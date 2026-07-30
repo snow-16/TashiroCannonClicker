@@ -16,10 +16,7 @@ public class VoteScheduler : MonoBehaviour
     [SerializeField]
     private VoteScheduleEvent _progressedVoteEvent;
 
-    /// <summary>
-    /// 各投票の期間管理を開始する
-    /// </summary>
-    public void StartSchedule()
+    void Start()
     {
         ServiceLocater.LocateService(out VoteDataManager manager);
 

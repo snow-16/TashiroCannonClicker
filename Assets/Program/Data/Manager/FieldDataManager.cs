@@ -1,6 +1,9 @@
+using UnityEngine;
+
 /// <summary>
 /// FieldDataの管理を行うマネージャーコンポーネント
 /// </summary>
+[DefaultExecutionOrder(-99)]
 public class FieldDataManager : ServiceBase
 {
     /// <summary> FieldDataのインスタンス </summary>

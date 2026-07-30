@@ -16,7 +16,7 @@ public class FieldDataHub : MonoBehaviour
 
     void Start()
     {
-        while(!ServiceLocater.LocateService(out _manager));
+        ServiceLocater.LocateService(out _manager);
     }
 
     /// <summary> データの更新を通知するイベント </summary>

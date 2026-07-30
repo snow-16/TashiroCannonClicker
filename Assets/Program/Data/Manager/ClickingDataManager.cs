@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ClickingDataの管理を行うマネージャーコンポーネント
 /// </summary>
+[DefaultExecutionOrder(-99)]
 public class ClickingDataManager : ServiceBase
 {
     /// <summary> 各クリック履歴を保存しておく時間 </summary>

@@ -16,7 +16,7 @@ public class CurrencyDataHub : MonoBehaviour
 
     void Start()
     {
-        while(!ServiceLocater.LocateService(out _manager));
+        ServiceLocater.LocateService(out _manager);
     }
 
     /// <summary>
