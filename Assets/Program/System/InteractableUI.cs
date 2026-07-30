@@ -40,21 +40,27 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     {
         _isFocused = true;
 
-        if(CanInteract && (_acceptInteract & UIIntercatType.Focus) > 0)
+        if(CanInteract)
         {
-            _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
-        }
+            if((_acceptInteract & UIIntercatType.Focus) > 0)
+            {
+                _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
+            }
 
-        OnFocus();
+            OnFocus();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _isFocused = false;
 
-        if(CanInteract && (_acceptInteract & UIIntercatType.Focus) > 0)
+        if(CanInteract)
         {
-            _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
+            if((_acceptInteract & UIIntercatType.Focus) > 0)
+            {
+                _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
+            }
         }
 
         OnFocus();
@@ -64,21 +70,27 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     {
         _isPressed = true;
 
-        if(CanInteract && (_acceptInteract & UIIntercatType.Press) > 0)
+        if(CanInteract)
         {
-            _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
-        }
+            if((_acceptInteract & UIIntercatType.Press) > 0)
+            {
+                _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
+            }
 
-        OnPress();
+            OnPress();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         _isPressed = false;
 
-        if(CanInteract && (_acceptInteract & UIIntercatType.Press) > 0)
+        if(CanInteract)
         {
-            _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
+            if((_acceptInteract & UIIntercatType.Press) > 0)
+            {
+                _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
+            }
         }
 
         OnPress();
@@ -98,5 +110,13 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     public virtual void OnPress()
     {
         
+    }
+
+    /// <summary>
+    /// 接触可否状態を反転させる
+    /// </summary>
+    public void SwitchLockInteract()
+    {
+        CanInteract = !CanInteract;
     }
 }
