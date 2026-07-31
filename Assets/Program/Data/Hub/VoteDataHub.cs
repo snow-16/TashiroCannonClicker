@@ -45,6 +45,7 @@ public class VoteDataHub : MonoBehaviour
     {
         Debug.Log($"{target}を開催しました。");
         _manager.ManageVote(target, VoteState.Opened);
+        _updateListeners?.Invoke(_manager.Data);
     }
 
     /// <summary>
@@ -55,6 +56,7 @@ public class VoteDataHub : MonoBehaviour
     {
         Debug.Log($"{target}を終了しました。");
         _manager.ManageVote(target, VoteState.Waiting);
+        _updateListeners?.Invoke(_manager.Data);
     }
 
     /// <summary>
@@ -65,6 +67,7 @@ public class VoteDataHub : MonoBehaviour
     {
         Debug.Log($"{target}は開催可能です。");
         _manager.ManageVote(target, VoteState.Closed);
+        _updateListeners?.Invoke(_manager.Data);
     }
 
     /// <summary> データの更新を通知するイベント </summary>

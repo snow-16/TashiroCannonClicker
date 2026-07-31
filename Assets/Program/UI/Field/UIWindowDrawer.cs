@@ -7,18 +7,11 @@ public class UIWindowDrawer : MonoBehaviour
     private Image _shadowImage;
 
     /// <summary>
-    /// タッチされた時
+    /// ウィンドウの状態の変更を受け取る
     /// </summary>
-    public void Interact()
+    /// <param name="state">ウィンドウの状態</param>
+    public void UpdateState(VoteState state)
     {
-        _shadowImage.gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// 投票が閉じた時
-    /// </summary>
-    public void Close()
-    {
-        _shadowImage.gameObject.SetActive(true);
+        _shadowImage.gameObject.SetActive(state != VoteState.Opened);
     }
 }
