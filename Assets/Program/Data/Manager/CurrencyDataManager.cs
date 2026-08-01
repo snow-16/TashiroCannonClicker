@@ -12,7 +12,7 @@ public class CurrencyDataManager : ServiceBase
     public void ModifyPopularity(int value)
     {
         Data.Popularity += value;
-        Debug.Log($"{Data.Popularity}Get");
+        Debug.Log($"{value}Get");
     }
 
     protected override void CreateService()

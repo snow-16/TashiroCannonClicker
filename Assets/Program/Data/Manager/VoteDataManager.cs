@@ -22,6 +22,10 @@ public class VoteDataManager : ServiceBase
         {
             ResetVote((VoteType)(1 << i));
         }
+
+        var first = Data.AllVotes[0];
+        first.state = VoteState.Waiting;
+        Data.AllVotes[0] = first;
     }
 
     void FixedUpdate()

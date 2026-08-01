@@ -14,6 +14,7 @@ public class FieldFactory : MonoBehaviour
         {
             var vote = Instantiate(_votePrefab, transform.position + new Vector3(0, i * _votesPadding), Quaternion.identity);
             vote.transform.parent = transform;
+            vote.GetComponent<VotingStationManager>().CreateStation((VoteType)(1 << i));
         }
     }
 }

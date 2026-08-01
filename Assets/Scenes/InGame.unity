@@ -1879,6 +1879,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _adjustmentSpeed: 0.1
+  _moveEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1361013459}
+        m_TargetAssemblyTypeName: FieldDataHub, Assembly-CSharp
+        m_MethodName: MoveVote
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1274024655
 GameObject:
   m_ObjectHideFlags: 0

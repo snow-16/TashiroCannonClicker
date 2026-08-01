@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117d6a64e48524ba48c2fddc708363db, type: 3}
   m_Name: ActivityVoteSetting
   m_EditorClassIdentifier: 
-  _initialRanking: 0
-  _popularity: 0
-  _depth: 0
-  _serverDurability: 0
+  _timeLimit: 10
+  _openInterval: 5
+  _initialRanking: 1000
+  _population: 1
+  _depth: 1
+  _serverDurability: 10

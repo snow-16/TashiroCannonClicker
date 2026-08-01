@@ -19,6 +19,16 @@ public class FieldDataHub : MonoBehaviour
         ServiceLocater.LocateService(out _manager);
     }
 
+    /// <summary>
+    /// 別の投票所へ移動する
+    /// </summary>
+    /// <param name="vote"></param>
+    public void MoveVote(VoteType vote)
+    {
+        _manager.Data.ViewVote = vote;
+        _updateListeners?.Invoke(_manager.Data);
+    }
+
     /// <summary> データの更新を通知するイベント </summary>
     [Serializable]
     private class FieldDataUpdataEvent : UnityEvent<FieldData>{}

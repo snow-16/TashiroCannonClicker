@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 各投票を切り替えるコンポーネント
@@ -10,9 +12,12 @@ public class FieldSlider : MonoBehaviour
     /// <summary> 画面位置調整の速度 </summary>
     [SerializeField]
     private float _adjustmentSpeed;
+    /// <summary> 投票所移動完了通知を受け取るリスナー </summary>
+    [SerializeField]
+    private VotingStationMoveEvent _moveEvent;
 
     /// <summary> フォーカスする投票所 </summary>
-    private Vector3 _viewPoint;
+    private VotingStationManager _targetStation;
     /// <summary> 画面位置調整の進行度 </summary>
     private float _adjustmentProgress = 1;
 
@@ -20,8 +25,13 @@ public class FieldSlider : MonoBehaviour
     {
         if(_adjustmentProgress != 1)
         {
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, _viewPoint, _adjustmentProgress);
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, _targetStation.transform.position + Vector3.back * 10, _adjustmentProgress);
             _adjustmentProgress = Mathf.Min(_adjustmentProgress + _adjustmentSpeed, 1);
+
+            if(_adjustmentProgress == 1)
+            {
+                _moveEvent?.Invoke(_targetStation.HeldVote);
+            }
         }
     }
 
@@ -46,7 +56,11 @@ public class FieldSlider : MonoBehaviour
         }
 
         var nearVotes = votes.OrderBy(vote => Mathf.Abs(Camera.main.transform.position.y - vote.position.y)).First();
-        _viewPoint = nearVotes.position + Vector3.back * 10;
+        _targetStation = nearVotes.GetComponent<VotingStationManager>();
         _adjustmentProgress = 0;
     }
+
+    /// <summary> 投票所移動完了を通知するイベント </summary>
+    [Serializable]
+    private class VotingStationMoveEvent : UnityEvent<VoteType>{}
 }
