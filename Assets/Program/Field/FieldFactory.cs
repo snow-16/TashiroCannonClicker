@@ -13,6 +13,7 @@ public class FieldFactory : MonoBehaviour
         for(int i = 0; i < Enum.GetValues(typeof(VoteType)).Length; i++)
         {
             var vote = Instantiate(_votePrefab, transform.position + new Vector3(0, i * _votesPadding), Quaternion.identity);
+            vote.transform.parent = transform;
         }
     }
 }
