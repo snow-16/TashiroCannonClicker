@@ -6,9 +6,6 @@ using UnityEngine.UI;
 /// </summary>
 public class UIWindowDrawer : MonoBehaviour
 {
-    /// <summary> ウィンドウの影のImage </summary>
-    [SerializeField]
-    private Image _shadowImage;
     /// <summary> スワイプ時のウィンドウ移動量 </summary>
     [SerializeField]
     private float _slideAmount;
@@ -27,15 +24,6 @@ public class UIWindowDrawer : MonoBehaviour
         rect = (RectTransform)transform;
 
         _windowPosition = rect.anchoredPosition;
-    }
-
-    /// <summary>
-    /// ウィンドウの状態の変更を受け取る
-    /// </summary>
-    /// <param name="state">ウィンドウの状態</param>
-    public void UpdateState(VoteState state)
-    {
-        _shadowImage.gameObject.SetActive(state != VoteState.Opened);
     }
 
     /// <summary>
