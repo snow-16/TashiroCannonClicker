@@ -57,7 +57,7 @@ public class UIWindowInteract : InteractableUI
     private void SetWindow()
     {
         var voteState = _voteDataManager.Data.AllVotes[(int)Mathf.Log((int)_showingVote, 2)].state;
-        CanInteract = voteState == VoteState.Closed;
+        CanInteract = voteState == VoteState.Waiting;
         _updateListener?.Invoke(voteState);
     }
 

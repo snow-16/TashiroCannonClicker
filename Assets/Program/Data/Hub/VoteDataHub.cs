@@ -55,7 +55,7 @@ public class VoteDataHub : MonoBehaviour
     public void CloseVote(VoteType target)
     {
         Debug.Log($"{target}を終了しました。");
-        _manager.ManageVote(target, VoteState.Waiting);
+        _manager.ManageVote(target, VoteState.Closed);
         _updateListeners?.Invoke(_manager.Data);
     }
 
@@ -66,7 +66,7 @@ public class VoteDataHub : MonoBehaviour
     public void ProgressedVote(VoteType target)
     {
         Debug.Log($"{target}は開催可能です。");
-        _manager.ManageVote(target, VoteState.Closed);
+        _manager.ManageVote(target, VoteState.Waiting);
         _updateListeners?.Invoke(_manager.Data);
     }
 

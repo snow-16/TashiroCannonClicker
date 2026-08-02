@@ -19,16 +19,25 @@ public class ClickObserver : MonoBehaviour
     /// <summary> 離した時の処理 </summary>
     [SerializeField]
     private UnityEvent _releaceEvent;
-    /// <summary> クリックできる範囲を示すコライダー </summary>
+    /// <summary> スワイプ開始時の処理 </summary>
     [SerializeField]
-    private Collider2D _canClickArea;
+    private UnityEvent _beginSwipeEvent;
     /// <summary> スワイプ時の処理 </summary>
     [SerializeField]
     private SwipeEvent _swipeEvent;
+    /// <summary> クリックできる範囲を示すコライダー </summary>
+    [SerializeField]
+    private Collider2D _canClickArea;
+    /// <summary> スワイプを感知する感度 </summary>
+    [SerializeField]
+    private float _swipeSensitivity;
 
     /// <summary> 現在クリックを受け付けているか </summary>
     private bool _canClicking = true;
+    /// <summary> 現在スワイプ中か </summary>
     private bool _isSwiping = false;
+    /// <summary> 最後にクリックした位置 </summary>
+    private Vector2 _clickPos;
 
     void Start()
     {
@@ -39,21 +48,34 @@ public class ClickObserver : MonoBehaviour
         var releace = Observable.EveryUpdate()
         .Where(_ => !_click.IsPressed());
 
-        var swipe = click.Select(_ => Observable.EveryUpdate().DoOnCancel(() => _isSwiping = false).TakeUntil(releace).Select(_ => Pointer.current.position.value).Pairwise()).Switch()
+        var swipe = click.Select(_ => Observable.EveryUpdate().TakeUntil(releace).Select(_ => Pointer.current.position.value).Pairwise()).Switch()
         .Where(positions => positions.Current.y != positions.Previous.y);
+
+        click.Subscribe(_ => _clickPos = Pointer.current.position.value);
         
-        swipe.Select(positions => Camera.main.ScreenToWorldPoint(positions.Current).y - Camera.main.ScreenToWorldPoint(positions.Previous).y)
+        swipe.Where(positions => _isSwiping || (positions.Current - _clickPos).magnitude > _swipeSensitivity)
+        .Select(positions => Camera.main.ScreenToWorldPoint(positions.Current).y - Camera.main.ScreenToWorldPoint(positions.Previous).y)
         .Subscribe(moveAmount => 
             {
                 _swipeEvent?.Invoke(moveAmount);
-                _isSwiping = true;
+
+                if(!_isSwiping)
+                {
+                    _isSwiping = true;
+                    _beginSwipeEvent?.Invoke();
+                }
             }
         ).AddTo(this);
 
-        click.SelectMany(_ => releace.TakeUntil(Observable.EveryUpdate().Where(_ => _isSwiping)).SkipUntil(releace).First())
+        click.SelectMany(_ => releace.TakeUntil(Observable.EveryUpdate().Where(_ => _isSwiping)).Take(1))
         .Subscribe(_ => _clickEvent?.Invoke()).AddTo(this);
 
-        click.SelectMany(releace.First()).Subscribe(_ => _releaceEvent?.Invoke());
+        click.SelectMany(releace.First()).Where(_ => _isSwiping).Subscribe(_ => 
+            {
+                _isSwiping = false;
+                _releaceEvent?.Invoke();
+            }
+        );
     }
 
     /// <summary>

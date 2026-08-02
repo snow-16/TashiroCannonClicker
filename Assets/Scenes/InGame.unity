@@ -332,7 +332,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _canClickArea: {fileID: 519420033}
+  _beginSwipeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 621274911}
+        m_TargetAssemblyTypeName: UIWindowDrawer, Assembly-CSharp
+        m_MethodName: CloseWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _swipeEvent:
     m_PersistentCalls:
       m_Calls:
@@ -348,6 +362,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _canClickArea: {fileID: 519420033}
+  _swipeSensitivity: 5
 --- !u!114 &196965047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,6 +1902,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: FieldDataHub, Assembly-CSharp
         m_MethodName: MoveVote
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 621274911}
+        m_TargetAssemblyTypeName: UIWindowDrawer, Assembly-CSharp
+        m_MethodName: OpenWindow
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
