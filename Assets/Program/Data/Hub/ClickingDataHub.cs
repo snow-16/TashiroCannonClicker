@@ -35,6 +35,16 @@ public class ClickingDataHub : MonoBehaviour
         _manager.ClickEvent();
     }
 
+    /// <summary>
+    /// 投票所移動時に投票先を変更する
+    /// </summary>
+    /// <param name="data"></param>
+    public void ChangeViewWindow(FieldData data)
+    {
+        _manager.Data.VoteTarget = data.ViewVote;
+        _updateListeners?.Invoke(_manager.Data);
+    }
+
     /// <summary> データの更新を通知するイベント </summary>
     [Serializable]
     private class ClickingDataUpdataEvent : UnityEvent<ClickingData>{}
