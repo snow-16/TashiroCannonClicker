@@ -37,7 +37,6 @@ public class InteractableButtonUI : InteractableUI
     {
         _buttonImage = GetComponent<Image>();
         _baseColor = _buttonImage.color;
-        _basePosition = transform.localPosition;
         _baseScale = transform.localScale;
 
         InteractEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)].AddListener(OnFocus);
@@ -57,6 +56,11 @@ public class InteractableButtonUI : InteractableUI
 
     public override void OnPress()
     {
+        if(_isPressed)
+        {
+            _basePosition = transform.localPosition;
+        }
+        
         transform.localPosition = _isPressed ? _basePosition + (Vector3)_pushedPositionOffset : _basePosition;
         transform.localScale = _isPressed ? _baseScale + (Vector3)_pushedScaleOffset : _baseScale;
     }
