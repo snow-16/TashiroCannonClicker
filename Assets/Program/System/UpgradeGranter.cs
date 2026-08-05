@@ -13,7 +13,7 @@ public class UpgradeGranter : MonoBehaviour
     /// </summary>
     /// <typeparam name="T">アップグレードの種類</typeparam>
     /// <param name="upgrade">アップグレード内容</param>
-    public void GrantUpgrade(IUpgradable taget)
+    public void GrantUpgrade(UpgradableObject taget)
     {
         taget.ApplyUpgrade(_upgrade);
     }

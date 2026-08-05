@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// アップグレードを付与するボタンコンポーネント
@@ -8,9 +6,17 @@ using UnityEngine.Events;
 public class UIUpgradeButton : InteractableButtonUI
 {
     [SerializeField]
-    private UpgradeEvent _upgradeEventListener;
+    private UpgradableObject _target;
+    [SerializeField]
+    private UpgradeData _upgrade;
 
-    /// <summary> データの更新を通知するイベント </summary>
-    [Serializable]
-    private class UpgradeEvent : UnityEvent<(GameObject, MonoBehaviour)>{}
+    void Start()
+    {
+        InteractEvent[(int)Mathf.Log((int)UIIntercatType.Click, 2)].AddListener(GrantUpgrade);
+    }
+
+    public void GrantUpgrade()
+    {
+        _target.ApplyUpgrade(_upgrade.Upgrade);
+    }
 }
