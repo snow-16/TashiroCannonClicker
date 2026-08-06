@@ -9,5 +9,5 @@ public abstract class UpgradeBase<T> : IUpgrade
     /// </summary>
     /// <param name="input">処理前の値</param>
     /// <returns>処理後の値</returns>
-    protected abstract T Processing(T input);
+    public abstract T Processing(T input);
 }

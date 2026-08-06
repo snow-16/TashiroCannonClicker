@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +9,7 @@ public class TashiroCannonCore : MonoBehaviour
 {
     /// <summary> 発射時の処理 </summary>
     [SerializeField]
-    private UnityEvent _fireEvent;
+    private FireEvent _fireEvent;
 
     /// <summary> 投票回数/秒 </summary>
     private float _votePerSecond;
@@ -22,7 +23,7 @@ public class TashiroCannonCore : MonoBehaviour
         if(_votePerSecond > 0 && _progressTime >= 1 / _votePerSecond)
         {
             _progressTime = 0;
-            _fireEvent?.Invoke();
+            _fireEvent?.Invoke(1);
         }
     }
 
@@ -34,4 +35,8 @@ public class TashiroCannonCore : MonoBehaviour
     {
         _votePerSecond = data.VotePerSecond;
     }
+
+    /// <summary> 発射を通知するイベント </summary>
+    [Serializable]
+    private class FireEvent : UnityEvent<int>{}
 }

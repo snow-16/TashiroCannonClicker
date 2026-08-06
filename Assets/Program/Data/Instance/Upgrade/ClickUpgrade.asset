@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: ClickUpgrade
   m_EditorClassIdentifier: 
   _upgrade:
-    rid: -2
+    rid: 8702124487690420306
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 8702124487690420306
+      type: {class: ClickSum, ns: , asm: Assembly-CSharp}
+      data:
+        _sumValue: 1

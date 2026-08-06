@@ -445,7 +445,7 @@ MonoBehaviour:
       - m_Target: {fileID: 196965047}
         m_TargetAssemblyTypeName: VoteListener, Assembly-CSharp
         m_MethodName: Vote
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -513,6 +513,7 @@ MonoBehaviour:
         m_CallState: 2
   _canClickArea: {fileID: 519420033}
   _swipeSensitivity: 5
+  _initialClickPower: 1
 --- !u!114 &196965047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,7 +527,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _voteTarget: 1
-  _initialVotePower: 1
   _onVoted:
     m_PersistentCalls:
       m_Calls:
@@ -1971,7 +1971,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1049295551}
         m_TargetAssemblyTypeName: VoteListener, Assembly-CSharp
         m_MethodName: Vote
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1993,7 +1993,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _voteTarget: 2
-  _initialVotePower: 2
   _onVoted:
     m_PersistentCalls:
       m_Calls:
@@ -2691,6 +2690,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216744300dfb944e09767abfcc5781ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _acceptInteract: 0
+  _interactEvent:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  _pushedColor: {r: 0, g: 0, b: 0, a: 0}
+  _pushedPositionOffset: {x: 0, y: 0}
+  _pushedScaleOffset: {x: 0, y: 0}
+  _target: {fileID: 196965046}
+  _upgrade: {fileID: 11400000, guid: 114e63f3c5d8041ab82c1b1349336cd5, type: 2}
 --- !u!1 &1514875156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2778,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045744cd037dd42b3a2c81103b762e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _upgrade:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1623454667
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using UnityEngine;
@@ -8,14 +9,14 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// クリック状態を監視するコンポーネント
 /// </summary>
-public class ClickObserver : MonoBehaviour
+public class ClickObserver : UpgradableObject
 {
     /// <summary> クリック入力 </summary>
     [SerializeField]
     private InputAction _click;
     /// <summary> クリック時の処理 </summary>
     [SerializeField]
-    private UnityEvent _clickEvent;
+    private ClickEvent _clickEvent;
     /// <summary> 離した時の処理 </summary>
     [SerializeField]
     private UnityEvent _releaceEvent;
@@ -31,6 +32,9 @@ public class ClickObserver : MonoBehaviour
     /// <summary> スワイプを感知する感度 </summary>
     [SerializeField]
     private float _swipeSensitivity;
+    /// <summary> クリック力の初期値 </summary>
+    [SerializeField]
+    private int _initialClickPower;
 
     /// <summary> 現在クリックを受け付けているか </summary>
     private bool _canClicking = true;
@@ -38,6 +42,8 @@ public class ClickObserver : MonoBehaviour
     private bool _isSwiping = false;
     /// <summary> 最後にクリックした位置 </summary>
     private Vector2 _clickPos;
+
+    private List<UpgradeBase<ClickValueProcessor>> _upgrades = new();
 
     void Start()
     {
@@ -68,7 +74,17 @@ public class ClickObserver : MonoBehaviour
         ).AddTo(this);
 
         click.SelectMany(_ => releace.TakeUntil(Observable.EveryUpdate().Where(_ => _isSwiping)).Take(1))
-        .Subscribe(_ => _clickEvent?.Invoke()).AddTo(this);
+        .Subscribe(_ => 
+            {
+                var processor = new ClickValueProcessor
+                {
+                    clickAmount = _initialClickPower
+                };
+                _upgrades.ForEach(process => processor = process.Processing(processor));
+                Debug.Log(processor.clickAmount);
+                _clickEvent?.Invoke(processor.clickAmount);
+            }
+        ).AddTo(this);
 
         click.SelectMany(releace.First()).Where(_ => _isSwiping).Subscribe(_ => 
             {
@@ -86,6 +102,15 @@ public class ClickObserver : MonoBehaviour
     {
         _canClicking = data.OpenMenu == MenuType.Close;
     }
+
+    public override void ApplyUpgrade(IUpgrade upgrade)
+    {
+        _upgrades.Add((UpgradeBase<ClickValueProcessor>)upgrade);
+    }
+
+    /// <summary> 画面のタップを通知するイベント </summary>
+    [Serializable]
+    private class ClickEvent : UnityEvent<int>{}
 
     /// <summary> 画面のスワイプを通知するイベント </summary>
     [Serializable]

@@ -10,9 +10,6 @@ public class VoteListener : MonoBehaviour
     /// <summary> 投票先 </summary>
     [SerializeField]
     private VoteType _voteTarget;
-    /// <summary> 投票力の初期値 </summary>
-    [SerializeField]
-    private int _initialVotePower;
     /// <summary> 投票時の処理 </summary>
     [SerializeField]
     private VoteEvent _onVoted;
@@ -20,17 +17,13 @@ public class VoteListener : MonoBehaviour
     /// <summary> VoterStatusDataのインスタンス </summary>
     private readonly VoterStatusData _voterStatusData = new();
 
-    void Start()
-    {
-        _voterStatusData.VotePower = _initialVotePower;
-    }
-
     /// <summary>
     /// 投票の発火を受け取るメソッド
     /// </summary>
-    public void Vote()
+    public void Vote(int voteAmount)
     {
         _voterStatusData.TargetVote = _voteTarget;
+        _voterStatusData.VotePower = voteAmount;
         _onVoted?.Invoke(_voterStatusData);
     }
 

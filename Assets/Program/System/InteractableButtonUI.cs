@@ -33,7 +33,7 @@ public class InteractableButtonUI : InteractableUI
     private Image _buttonImage;
 
 
-    void Start()
+    protected virtual void Start()
     {
         _buttonImage = GetComponent<Image>();
         _baseColor = _buttonImage.color;
