@@ -53,12 +53,13 @@ public class ClickObserver : UpgradableObject
         .Where(_ => _click.WasPressedThisFrame() && _canClicking && Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint((Vector3)Pointer.current.position.value + Vector3.back * 10), 0).Contains(_canClickArea));
         var releace = Observable.EveryUpdate()
         .Where(_ => !_click.IsPressed());
-
         var swipe = click.Select(_ => Observable.EveryUpdate().TakeUntil(releace).Select(_ => Pointer.current.position.value).Pairwise()).Switch()
         .Where(positions => positions.Current.y != positions.Previous.y);
 
+        //タップ時にポインター座標を保存
         click.Subscribe(_ => _clickPos = Pointer.current.position.value);
         
+        //スワイプ時の挙動
         swipe.Where(positions => _isSwiping || (positions.Current - _clickPos).magnitude > _swipeSensitivity)
         .Select(positions => Camera.main.ScreenToWorldPoint(positions.Current).y - Camera.main.ScreenToWorldPoint(positions.Previous).y)
         .Subscribe(moveAmount => 
@@ -73,6 +74,7 @@ public class ClickObserver : UpgradableObject
             }
         ).AddTo(this);
 
+        //タップ時の挙動
         click.SelectMany(_ => releace.TakeUntil(Observable.EveryUpdate().Where(_ => _isSwiping)).Take(1))
         .Subscribe(_ => 
             {
@@ -80,12 +82,19 @@ public class ClickObserver : UpgradableObject
                 {
                     clickAmount = _initialClickPower
                 };
-                _upgrades.ForEach(process => processor = process.Processing(processor));
-                Debug.Log(processor.clickAmount);
+
+                _upgrades.GroupBy(upgrade => upgrade.Priority).OrderBy(upgrades => upgrades.Key).ToList().ForEach(upgrades =>
+                    {
+                        upgrades.ToList().ForEach(process => processor = process.Processing(processor));
+                        processor = processor.Processing();
+                    }
+                );
+
                 _clickEvent?.Invoke(processor.clickAmount);
             }
         ).AddTo(this);
 
+        //スワイプ後の挙動
         click.SelectMany(releace.First()).Where(_ => _isSwiping).Subscribe(_ => 
             {
                 _isSwiping = false;

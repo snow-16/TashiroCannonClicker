@@ -30,9 +30,9 @@ public class ClickingDataHub : MonoBehaviour
     /// <summary>
     /// 画面がクリックされた時
     /// </summary>
-    public void OnClick()
+    public void OnClick(VoterStatusData data)
     {
-        _manager.ClickEvent();
+        _manager.ClickEvent(data.VotePower);
     }
 
     /// <summary>

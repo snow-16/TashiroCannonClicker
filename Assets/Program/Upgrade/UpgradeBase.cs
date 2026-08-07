@@ -1,9 +1,17 @@
+using UnityEngine;
+
 /// <summary>
 /// アップグレードの内容を設定するための抽象クラス
 /// </summary>
 /// <typeparam name="T">アップグレード対象の型</typeparam>
 public abstract class UpgradeBase<T> : IUpgrade
 {
+    /// <summary> アップグレードの処理適用の優先度 </summary>
+    [SerializeField]
+    protected int _priority;
+    /// <summary> アップグレードの処理適用の優先度 </summary>
+    public int Priority => _priority;
+
     /// <summary>
     /// 値を受け取り、アップグレード内容に応じて処理した値を返すメソッド
     /// </summary>

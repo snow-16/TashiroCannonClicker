@@ -533,7 +533,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1361013456}
         m_TargetAssemblyTypeName: ClickingDataHub, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2690,7 +2690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216744300dfb944e09767abfcc5781ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceptInteract: 0
+  _acceptInteract: 1
   _interactEvent:
   - m_PersistentCalls:
       m_Calls: []
@@ -2698,9 +2698,9 @@ MonoBehaviour:
       m_Calls: []
   - m_PersistentCalls:
       m_Calls: []
-  _pushedColor: {r: 0, g: 0, b: 0, a: 0}
+  _pushedColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
   _pushedPositionOffset: {x: 0, y: 0}
-  _pushedScaleOffset: {x: 0, y: 0}
+  _pushedScaleOffset: {x: -0.05, y: -0.05}
   _target: {fileID: 196965046}
   _upgrade: {fileID: 11400000, guid: 114e63f3c5d8041ab82c1b1349336cd5, type: 2}
 --- !u!1 &1514875156

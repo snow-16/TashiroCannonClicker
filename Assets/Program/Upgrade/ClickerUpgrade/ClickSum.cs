@@ -13,7 +13,7 @@ public class ClickSum : UpgradeBase<ClickValueProcessor>
 
     public override ClickValueProcessor Processing(ClickValueProcessor input)
     {
-        input.clickAmount += _sumValue;
+        input.addend += _sumValue;
         return input;
     }
 }

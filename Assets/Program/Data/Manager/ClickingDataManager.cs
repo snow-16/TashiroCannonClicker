@@ -20,10 +20,10 @@ public class ClickingDataManager : ServiceBase
     /// <summary>
     /// クリック処理
     /// </summary>
-    public void ClickEvent()
+    public void ClickEvent(int votePower)
     {
         Data.ClickCount++;
-        _clickLogs.Add((0, 1));
+        _clickLogs.Add((0, votePower));
     }
 
     /// <summary>
