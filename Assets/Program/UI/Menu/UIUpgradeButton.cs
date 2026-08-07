@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -11,13 +13,36 @@ public class UIUpgradeButton : InteractableButtonUI
     /// <summary> 付与するアップグレード </summary>
     [SerializeField]
     private UpgradeData _upgrade;
+    /// <summary> アップグレード購入条件 </summary>
+    [SerializeReference, SubclassSelector]
+    private List<IUpgradeFilter> _filters;
+
+    /// <summary> アップグレードが購入済みか </summary>
+    private bool _isBought = false;
 
     protected override void Start()
     {
         base.Start();
 
         InteractEvent[(int)Mathf.Log((int)UIIntercatType.Click, 2)].AddListener(GrantUpgrade);
+        InteractEvent[(int)Mathf.Log((int)UIIntercatType.Click, 2)].AddListener(() => IsLocked = _isBought = true);
         IsLocked = true;
+    }
+
+    void Update()
+    {
+        if(!_isBought && IsLocked)
+        {
+            IsLocked = false;
+            foreach(var filter in _filters)
+            {
+                if(!filter.CanUpgrade())
+                {
+                    IsLocked = true;
+                    break;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -26,5 +51,6 @@ public class UIUpgradeButton : InteractableButtonUI
     public void GrantUpgrade()
     {
         _target.ApplyUpgrade(_upgrade.Upgrade);
+        _filters.ForEach(filter => filter.AppliedUpgrade());
     }
 }

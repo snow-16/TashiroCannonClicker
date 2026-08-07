@@ -2703,6 +2703,30 @@ MonoBehaviour:
   _pushedScaleOffset: {x: -0.05, y: -0.05}
   _target: {fileID: 196965046}
   _upgrade: {fileID: 11400000, guid: 114e63f3c5d8041ab82c1b1349336cd5, type: 2}
+  _filters:
+  - rid: 8702124487690420346
+  references:
+    version: 2
+    RefIds:
+    - rid: 8702124487690420346
+      type: {class: CurrencyFilter, ns: , asm: Assembly-CSharp}
+      data:
+        _requirePopularity: 10
+        _useCurrencyEvent:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 1361013458}
+              m_TargetAssemblyTypeName: CurrencyDataHub, Assembly-CSharp
+              m_MethodName: UseCurrency
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
 --- !u!1 &1514875156
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,6 +31,12 @@ public class CurrencyDataHub : MonoBehaviour
         _updateListeners?.Invoke(_manager.Data);
     }
 
+    public void UseCurrency(CurrencyStatement statement)
+    {
+        _manager.Data.Popularity -= statement.popularity;
+        _updateListeners?.Invoke(_manager.Data);
+    }
+
     /// <summary> データの更新を通知するイベント </summary>
     [Serializable]
     private class CurrencyDataUpdataEvent : UnityEvent<CurrencyData>{}

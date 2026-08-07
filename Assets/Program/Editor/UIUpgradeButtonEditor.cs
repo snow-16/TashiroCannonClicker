@@ -11,6 +11,7 @@ public class UIUpgradeEditorEditor : InteractableButtonUIEditor
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("_target"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("_upgrade"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("_filters"));
 
         serializedObject.ApplyModifiedProperties();
     }

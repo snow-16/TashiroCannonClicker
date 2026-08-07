@@ -56,8 +56,6 @@ public class VoteDataManager : ServiceBase
                 target.voteCount += votePower;
                 target.ranking -= votePower;
                 Data.AllVotes[i] = target;
-
-                Debug.Log($"{(int)Data.AllVotes[i].ranking}位");
             }
         }
     }
