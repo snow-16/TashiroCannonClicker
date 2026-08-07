@@ -15,8 +15,9 @@ public class UIUpgradeButton : InteractableButtonUI
     protected override void Start()
     {
         base.Start();
-        
+
         InteractEvent[(int)Mathf.Log((int)UIIntercatType.Click, 2)].AddListener(GrantUpgrade);
+        IsLocked = true;
     }
 
     /// <summary>

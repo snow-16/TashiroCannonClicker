@@ -22,6 +22,8 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
 
     /// <summary> 現在触れるか </summary>
     public bool CanInteract { get; set; } = true;
+    /// <summary> 現在ボタンがロックされているか </summary>
+    public bool IsLocked { get; set; } = false;
 
     /// <summary> 今マウスオーバーされているか </summary>
     protected bool _isFocused = false;
@@ -30,7 +32,7 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(CanInteract && (_acceptInteract & UIIntercatType.Click) > 0)
+        if(CanInteract && !IsLocked && (_acceptInteract & UIIntercatType.Click) > 0)
         {
             _interactEvent[(int)Mathf.Log((int)UIIntercatType.Click, 2)]?.Invoke();
         }
@@ -40,7 +42,7 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     {
         _isFocused = true;
 
-        if(CanInteract)
+        if(CanInteract && !IsLocked)
         {
             if((_acceptInteract & UIIntercatType.Focus) > 0)
             {
@@ -55,22 +57,25 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     {
         _isFocused = false;
 
-        if(CanInteract)
+        if(!IsLocked)
         {
-            if((_acceptInteract & UIIntercatType.Focus) > 0)
+            if(CanInteract)
             {
-                _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
+                if((_acceptInteract & UIIntercatType.Focus) > 0)
+                {
+                    _interactEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)]?.Invoke();
+                }
             }
-        }
 
-        OnFocus();
+            OnFocus();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         _isPressed = true;
 
-        if(CanInteract)
+        if(CanInteract && !IsLocked)
         {
             if((_acceptInteract & UIIntercatType.Press) > 0)
             {
@@ -85,15 +90,18 @@ public abstract class InteractableUI : MonoBehaviour, IPointerClickHandler, IPoi
     {
         _isPressed = false;
 
-        if(CanInteract)
+        if(!IsLocked)
         {
-            if((_acceptInteract & UIIntercatType.Press) > 0)
+            if(CanInteract)
             {
-                _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
+                if((_acceptInteract & UIIntercatType.Press) > 0)
+                {
+                    _interactEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)]?.Invoke();
+                }
             }
-        }
 
-        OnPress();
+            OnPress();
+        }
     }
 
     /// <summary>

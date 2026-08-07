@@ -1,3 +1,4 @@
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,13 +42,19 @@ public class InteractableButtonUI : InteractableUI
 
         InteractEvent[(int)Mathf.Log((int)UIIntercatType.Focus, 2)].AddListener(OnFocus);
         InteractEvent[(int)Mathf.Log((int)UIIntercatType.Press, 2)].AddListener(OnPress);
+
+        this.ObserveEveryValueChanged(_ => IsLocked).Subscribe(isLocked =>
+            {
+                _buttonImage.color = isLocked || _isFocused ? _baseColor - (Color.white - _pushedColor) : _baseColor;
+            }
+        );
     }
 
     public override void OnFocus()
     {
         _buttonImage.color = _isFocused ? _baseColor - (Color.white - _pushedColor) : _baseColor;
         
-        if(!_isFocused)
+        if(!_isFocused && _isPressed)
         {
             transform.localPosition = _basePosition;
             transform.localScale = _baseScale;
